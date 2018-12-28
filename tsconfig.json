@@ -1,0 +1,16 @@
+{
+    "extends": "./base/tsconfig.base.json",
+
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceRoot": ".",
+        "inlineSourceMap": true,
+        "outDir": "./lib"
+    },
+    "include": [
+        "./src/**/*",
+        "./*"
+    ],
+    "exclude": ["./src/**/__tests__/*"]
+}
+
