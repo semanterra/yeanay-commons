@@ -4,7 +4,6 @@
     "compilerOptions": {
         "rootDir": ".",
         "sourceRoot": ".",
-        "inlineSourceMap": true,
         "outDir": "./lib"
     },
     "include": [

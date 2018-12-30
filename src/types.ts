@@ -1,10 +1,5 @@
 export type AccessToken = string
 
-/** small integer used to identify legislators within a state/chamber/term
- or a district within a state.  Used for recording votes tersely
- */
-export type Ordinal = number
-
 export type UserId = string // Auth0 ID
 
 /* durable uuid-style user id gen'd by yeanay
@@ -23,7 +18,6 @@ export interface StateChamber {
     chamberId: ChamberId
 }
 export type SessionId = string
-export type TermId = string
 
 export type BillId = string // an OpenStates bill id, not a state-assigned ID
 export type BillName = string // State-level bill ID, e.g. HB 101
@@ -73,36 +67,46 @@ export interface IDed {
     id: PrimaryKey
 }
 
+/** small integer used to identify legislators within a state/chamber/term
+ *  or a district within a state.  Used for recording votes tersely
+ */
+
+export type Ordinal = number
+
+
 export const chamberIdToChar = (id: ChamberId) => id.substr(0, 1)
 
 export class ChamberType {
 
-    readonly char: ChamberChar
+    public readonly char: ChamberChar
 
     constructor(readonly _id: ChamberId) {
         this.char = _id.substr(0, 1) as ChamberChar
     }
 
-    get id() {
+    get id(): ChamberId {
         return this._id
     }
 
-    expandCensusGeoid(censusGeoid) {
+/* probably not used
+    expandCensusGeoid(censusGeoid): string {
         return `sld${this.char}-${censusGeoid}`
     }
+*/
 
-    toString() {
+    public toString(): string {
         return 'ChamberType ' + this.char
     }
 
-    get other() {
+    public get other(): ChamberType {
+        // tslint:disable-next-line:no-use-before-declare
         return this.char === 'u' ? lowerChamberType : upperChamberType
     }
 }
 
 export const upperChamberType = new ChamberType('upper')
 export const lowerChamberType = new ChamberType('lower')
-export function getChamberType(id: ChamberId) {
+export function getChamberType(id: ChamberId): ChamberType {
     const c = id.substr(0, 1)
     return c === 'u' ? upperChamberType : lowerChamberType
 }
@@ -114,7 +118,7 @@ export class DistrictType {
     constructor(readonly id: DistrictTypeId, readonly chamberType: ChamberType) {
     }
 
-    toString() {
+    public toString(): string {
         return 'DistrictType ' + this.id
     }
 
@@ -124,9 +128,9 @@ export const lowerDistrictType = new DistrictType('l', lowerChamberType)
 export const upperDistrictType = new DistrictType('u', upperChamberType)
 export const floterialDistrictType = new DistrictType('f', lowerChamberType)
 
-const districtTypes = [lowerDistrictType, upperDistrictType, floterialDistrictType]
+// const districtTypes = [lowerDistrictType, upperDistrictType, floterialDistrictType]
 export const districtTypesById: {[key in DistrictTypeId]:DistrictType} = {
     l: lowerDistrictType,
     u: upperDistrictType,
-    f: floterialDistrictType
+    f: floterialDistrictType,
 }

@@ -3,25 +3,25 @@
 export type SortComparer<T> = (a:T, b:T) => number // sort comparer
 
 export function last<T>(a:T[]): T | null {
-    return a[a.length-1]
+    return ( a && a.length) ? a[a.length-1] : null
 }
 
-export function compareStrings(a, b) {
+export function compareStrings(a:string, b:string): number {
     return a > b ? 1 : a === b ? 0 : -1
 }
 export const compareDates = compareStrings
-export function compareNumbers(a,b) {
+export function compareNumbers(a: number,b:number): number {
     return a-b
 }
 
-export function invertComparer(c) {
+export function invertComparer<T>(c:SortComparer<T>):SortComparer<T> {
     return (a, b) => -c(a, b)
 }
-export function makeSortComparer<REC,FLD>(
+export function makeSortComparer<REC,FLD, T>(
     extractor:(rec:REC)=>FLD,
-    comparer:SortComparer<FLD>
-) {
-    return (a, b) => comparer(extractor(a), extractor(b))
+    comparer:SortComparer<FLD>,
+): (a:REC, b:REC)=>number {
+    return (a:REC, b:REC) => comparer(extractor(a), extractor(b))
 }
 
 // for multicolumn compares.  Just supports two for now.
@@ -35,20 +35,20 @@ export const multiCompare = (c1, c2) => (a,b) => {
  * @param extractor
  * @param arr
  */
-export function partitionBy(extractor, arr) {
-    let ret: any[] = []
+export function partitionBy<REC,FLD>(extractor:(rec:REC)=>FLD, arr:REC[]): REC[][] {
+    let ret: REC[][] = []
     let i = 0
-    let prev = undefined
+    let prev: FLD | undefined = undefined
     while (i < arr.length) {
         const el = arr[i]
-        const next = extractor(el)
-        if (next == prev) {
-            last(ret).push(el)
+        const next: FLD = extractor(el)
+        if (next === prev) {
+            last(ret)!.push(el)
         } else {
             ret.push([el])
             prev = next
         }
-        i += 1;
+        i += 1
     }
     return ret
 }
@@ -57,14 +57,13 @@ export function partitionBy(extractor, arr) {
  * I am so tired of being f'd up by "map" hosing "this".
  * @param array
  * @param iteratee
- * @returns {any[]}
+ * @returns S
+ * @deprecated prefer R.map
  */
 export function arrayMap<T, S>(array: T[], iteratee: (input: T, index: number) => S): S[] {
     const length = array == null ? 0 : array.length
     const result = Array(length)
-
-    let index = -1
-    while (++index < length) {
+    for ( let index = 0; index < length; index += 1) {
         result[index] = iteratee(array[index], index)
     }
     return result
