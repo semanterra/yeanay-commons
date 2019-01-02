@@ -1,5 +1,5 @@
 export * from './types'
 
-export {geoStates} from './geostates'
+export {geoStates} from './geoStates'
 
 
