@@ -175,7 +175,7 @@
         **/
       "chai-vague-errors": true,
       "chai-prefer-contains-to-index-of": true,
-      "mocha-no-side-effect-code": true
+      "mocha-no-side-effect-code": false // plays poorly with jest
 
 
   },

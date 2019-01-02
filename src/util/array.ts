@@ -6,18 +6,25 @@ export function last<T>(a:T[]): T | null {
     return ( a && a.length) ? a[a.length-1] : null
 }
 
+// normal ascii order
 export function compareStrings(a:string, b:string): number {
     return a > b ? 1 : a === b ? 0 : -1
 }
+
+// this is for dates in yyyy-mm-dd format
 export const compareDates = compareStrings
+
+
 export function compareNumbers(a: number,b:number): number {
     return a-b
 }
 
 export function invertComparer<T>(c:SortComparer<T>):SortComparer<T> {
-    return (a, b) => -c(a, b)
+    return (a, b) => c(b, a)
 }
-export function makeSortComparer<REC,FLD, T>(
+
+// formerly makeSortComparer
+export function makeFieldComparer<REC,FLD, T>(
     extractor:(rec:REC)=>FLD,
     comparer:SortComparer<FLD>,
 ): (a:REC, b:REC)=>number {
@@ -60,6 +67,7 @@ export function partitionBy<REC,FLD>(extractor:(rec:REC)=>FLD, arr:REC[]): REC[]
  * @returns S
  * @deprecated prefer R.map
  */
+/*
 export function arrayMap<T, S>(array: T[], iteratee: (input: T, index: number) => S): S[] {
     const length = array == null ? 0 : array.length
     const result = Array(length)
@@ -68,3 +76,4 @@ export function arrayMap<T, S>(array: T[], iteratee: (input: T, index: number) =
     }
     return result
 }
+*/

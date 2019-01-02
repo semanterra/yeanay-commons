@@ -1,6 +1,6 @@
 {
   "name": "@yeanay/yeanay-commons",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "semanterra/yeanay-commons",
   "description": "yeanay code, config and docs shared across server and client",
   "main": "lib/src/index.js",
@@ -10,14 +10,14 @@
     "clean": "rm -rf lib",
     "lint": "npx tslint --project . --format verbose",
     "prepublishOnly": "npm run clean && npm run build && npm run lint && npm run test",
-    "test": "jest",
+    "test": "jest --coverage",
     "debug-jest": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*\\.(test|spec))\\.(ts|tsx)$",
+    "testRegex": "(/.*\\.(test|spec))\\.(ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -29,6 +29,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",

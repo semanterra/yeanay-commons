@@ -11,7 +11,6 @@
 
         "noImplicitAny": false,
         "noImplicitThis": true,
-        "noUnusedLocals": true,
         "strictNullChecks" :true,
         "noStrictGenericChecks": true,
         "allowJs": false,
