@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/semanterra/yeanay-commons.svg?branch=master)](https://travis-ci.com/semanterra/yeanay-commons)
+
 This project is for dependencies common to both client and server projects.
 
 
