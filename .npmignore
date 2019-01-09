@@ -5,7 +5,6 @@
 /coverage/
 
 # npmignore only
-/base/
 /doc/
 **/*.test.*
 **/__tests__/
