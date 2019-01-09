@@ -9,5 +9,4 @@
 **/*.test.*
 **/__tests__/
 .travis.yml
-*.json
 *.iml
