@@ -4,5 +4,8 @@
   */
 
 {
-"extends": "./base/tslint.base.json"
+    "extends": "./base/tslint.base.json",
+    "rulesDirectory": [
+        "node_modules/tslint-microsoft-contrib"
+    ]
 }

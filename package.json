@@ -1,6 +1,6 @@
 {
   "name": "@yeanay/yeanay-commons",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "semanterra/yeanay-commons",
   "description": "yeanay code, config and docs shared across server and client",
   "main": "lib/src/index.js",

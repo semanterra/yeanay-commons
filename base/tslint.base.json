@@ -178,8 +178,5 @@
       "mocha-no-side-effect-code": false // plays poorly with jest
 
 
-  },
-  "rulesDirectory": [
-    "../node_modules/tslint-microsoft-contrib"
-  ]
+  }
 }
