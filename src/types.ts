@@ -1,3 +1,5 @@
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
 export type AccessToken = string
 
 export type UserId = string // Auth0 ID
@@ -63,9 +65,12 @@ export type Geoid = string
 export type OfficeType =  'capitol' | 'district'
 export type CommitteeId = string
 
-export interface IDed {
-    id: PrimaryKey
+export interface IDed<T = PrimaryKey> {
+    id: T
 }
+
+// For use in inserting records with autogen'd id
+export type WithoutId<T extends IDed> = Omit<T, 'id'>
 
 /** small integer used to identify legislators within a state/chamber/term
  *  or a district within a state.  Used for recording votes tersely
