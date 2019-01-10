@@ -65,12 +65,12 @@ export type Geoid = string
 export type OfficeType =  'capitol' | 'district'
 export type CommitteeId = string
 
-export interface IDed<T = PrimaryKey> {
-    id: T
+export interface IDed<PK> {
+    id: PK
 }
 
 // For use in inserting records with autogen'd id
-export type WithoutId<T extends IDed> = Omit<T, 'id'>
+export type WithoutId<T extends IDed<PK>, PK> = Omit<T, 'id'>
 
 /** small integer used to identify legislators within a state/chamber/term
  *  or a district within a state.  Used for recording votes tersely
